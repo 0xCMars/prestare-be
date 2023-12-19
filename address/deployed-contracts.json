@@ -1,0 +1,241 @@
+{
+  "CounterAddressesProvider": {
+    "local": {
+      "address": "0x9A86494Ba45eE1f9EEed9cFC0894f6C5d13a1F0b",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    }
+  },
+  "ReserveLogic": {
+    "local": {
+      "address": "0x1c1521cf734CD13B02e8150951c3bF2B438be780",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    }
+  },
+  "GenericLogic": {
+    "local": {
+      "address": "0x4432a6DcfAEAB227673B43C30c6fEf40eaBD5D30",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    }
+  },
+  "CRTLogic": {
+    "local": {
+      "address": "0x0B1a87021ec75fBaE919b1e86b2B1335FFC8F4d3",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    }
+  },
+  "ValidationLogic": {
+    "local": {
+      "address": "0x18eb8AF587dcd7E4F575040F6D800a6B5Cef6CAf",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    }
+  },
+  "Counter": {
+    "local": {
+      "address": "0xA4aE77554847958aC0854f06601267c9F9C75dfD",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    }
+  },
+  "CounterConfigurator": {
+    "local": {
+      "address": "0x4A351C6aE3249499CBb50E8FE6566E2615386Da8",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    }
+  },
+  "DAI": {
+    "local": {
+      "address": "0x6B175474E89094C44Da98b954EedeAC495271d0F"
+    }
+  },
+  "WETH": {
+    "local": {
+      "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
+    }
+  },
+  "USDC": {
+    "local": {
+      "address": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+    }
+  },
+  "USDT": {
+    "local": {
+      "address": "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+    }
+  },
+  "PriceOracle": {
+    "local": {
+      "address": "0x20F5f006a0184883068bBF58fb0c526A8EEa8BFD",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    }
+  },
+  "PrestareOracle": {
+    "local": {
+      "address": "0x575D3d18666B28680255a202fB5d482D1949bB32",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    }
+  },
+  "CounterCollateralManager": {
+    "local": {
+      "address": "0x8d375dE3D5DDde8d8caAaD6a4c31bD291756180b",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    }
+  },
+  "PlatformTokenInterestRateModel": {
+    "local": {
+      "address": "0x9852795dbb01913439f534b4984fBf74aC8AfA12",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    }
+  },
+  "DefaultReserveInterestRateStrategy": {
+    "local": {
+      "address": "0x499AA73A1D27e54B33E7DB05ffd22854EC70257E",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    }
+  },
+  "rateStrategyCClass": {
+    "local": {
+      "address": "0xf274De14171Ab928A5Ec19928cE35FaD91a42B64"
+    }
+  },
+  "pDAI-C": {
+    "local": {
+      "address": "0xcb0A9835CDf63c84FE80Fcc59d91d7505871c98B",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    }
+  },
+  "variable Debt pDAI": {
+    "local": {
+      "address": "0xFD296cCDB97C605bfdE514e9810eA05f421DEBc2",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    }
+  },
+  "pWETH-C": {
+    "local": {
+      "address": "0x8b9d5A75328b5F3167b04B42AD00092E7d6c485c",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    }
+  },
+  "variable Debt pWETH": {
+    "local": {
+      "address": "0x9BcA065E19b6d630032b53A8757fB093CbEAfC1d",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    }
+  },
+  "pUSDC-C": {
+    "local": {
+      "address": "0xd8A9159c111D0597AD1b475b8d7e5A217a1d1d05",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    }
+  },
+  "variable Debt pUSDC": {
+    "local": {
+      "address": "0xCdb63c58b907e76872474A0597C5252eDC97c883",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    }
+  },
+  "pUSDT-C": {
+    "local": {
+      "address": "0x15BB2cc3Ea43ab2658F7AaecEb78A9d3769BE3cb",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    }
+  },
+  "variable Debt pUSDT": {
+    "local": {
+      "address": "0xa4d0806d597146df93796A38435ABB2a3cb96677",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    }
+  },
+  "rateStrategyBClass": {
+    "local": {
+      "address": "0x0B32a3F8f5b7E5d315b9E52E640a49A89d89c820"
+    }
+  },
+  "pDAI-B": {
+    "local": {
+      "address": "0xF357118EBd576f3C812c7875B1A1651a7f140E9C",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    }
+  },
+  "variable Debt pDAI-B": {
+    "local": {
+      "address": "0x519b05b3655F4b89731B677d64CEcf761f4076f6",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    }
+  },
+  "pWETH-B": {
+    "local": {
+      "address": "0x057cD3082EfED32d5C907801BF3628B27D88fD80",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    }
+  },
+  "variable Debt pWETH-B": {
+    "local": {
+      "address": "0xb6057e08a11da09a998985874FE2119e98dB3D5D",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    }
+  },
+  "pUSDC-B": {
+    "local": {
+      "address": "0xad203b3144f8c09a20532957174fc0366291643c",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    }
+  },
+  "variable Debt pUSDC-B": {
+    "local": {
+      "address": "0x31403b1e52051883f2Ce1B1b4C89f36034e1221D",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    }
+  },
+  "pUSDT-B": {
+    "local": {
+      "address": "0x4278C5d322aB92F1D876Dd7Bd9b44d1748b88af2",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    }
+  },
+  "variable Debt pUSDT-B": {
+    "local": {
+      "address": "0x0D92d35D311E54aB8EEA0394d7E773Fc5144491a",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    }
+  },
+  "rateStrategyAClass": {
+    "local": {
+      "address": "0x499AA73A1D27e54B33E7DB05ffd22854EC70257E"
+    }
+  },
+  "pUSDC-A": {
+    "local": {
+      "address": "0x4c04377f90Eb1E42D845AB21De874803B8773669",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    }
+  },
+  "variable Debt pUSDC-A": {
+    "local": {
+      "address": "0xf93b0549cD50c849D792f0eAE94A598fA77C7718",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    }
+  },
+  "pUSDT-A": {
+    "local": {
+      "address": "0x8CeA85eC7f3D314c4d144e34F2206C8Ac0bbadA1",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    }
+  },
+  "variable Debt pUSDT-A": {
+    "local": {
+      "address": "0x29023DE63D7075B4cC2CE30B55f050f9c67548d4",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    }
+  },
+  "WETHGateway": {
+    "local": {
+      "address": "0xFcCa971FE9Ee20C1Cf22596E700aA993D8fD19c5",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    }
+  },
+  "CRT": {
+    "local": {
+      "address": "0x04F75a27cE2FDC591C71a88f1EcaC7e5Ce44f5Fc",
+      "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+    }
+  }
+}
