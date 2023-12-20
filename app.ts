@@ -47,6 +47,6 @@ app.get("/userWallet/:tokenSymbol/:assetTier/:userAddr", (req: Request, res: Res
 //   console.log(`服务器运行端口： ${PORT}.`);
 // });
 const PORT = 8686;
-app.listen(PORT,() => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(` running at http://120.53.224.174:${PORT}`);
 });
