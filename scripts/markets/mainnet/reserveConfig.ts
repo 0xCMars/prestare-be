@@ -1,7 +1,7 @@
-import { ContractName, IPlatformInterestRateStrategyParams } from '../../helpers/types';
+import { ContractName, IPlatformInterestRateStrategyParams } from '../../../helpers/types';
 import { rateStrategyAClass, rateStrategyBClass, rateStrategyCClass, rateStrategyAtoken} from './rateStrategies';
-import { IReserveParams } from '../../helpers/types';
-import { oneRay } from '../../helpers/constants';
+import { IReserveParams } from '../../../helpers/types';
+import { oneRay } from '../../../helpers/constants';
 
 export const strategyDAI_B: IReserveParams = {
   strategy: rateStrategyBClass,

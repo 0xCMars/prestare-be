@@ -36,14 +36,16 @@ app.get("/dashboard/tokenInfo/:tokenSymbol/:assetTier", (req: Request, res: Resp
 app.get("/assetPage/assetInfo/:tokenSymbol/:assetTier", (req: Request, res: Response) => getAssetInfo(req, res));
 
 // todo 获取用户在某个token上的余额
+app.get("/userWallet")
+// todo 获取用户在某个token上的余额
 // todo 获取用户的账户情况
 
 // 设置监听端口
-const PORT = process.env.PORT || 8080;
+// const PORT = process.env.PORT || 8686;
 // app.listen(PORT, () => {
 //   console.log(`服务器运行端口： ${PORT}.`);
 // });
-
-app.listen(PORT, () => {
-  console.log(` running at http://localhost:${PORT}`);
+const PORT = 8686;
+app.listen(PORT, '0.0.0.0',() => {
+  console.log(` running at http://120.53.224.174:${PORT}`);
 });

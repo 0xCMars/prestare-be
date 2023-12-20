@@ -1,6 +1,6 @@
 import { BigNumber } from 'ethers';
-import { oneRay } from '../../helpers/constants';
-import { IInterestRateStrategyParams, IPlatformInterestRateStrategyParams } from '../../helpers/types';
+import { oneRay } from '../../../helpers/constants';
+import { IInterestRateStrategyParams, IPlatformInterestRateStrategyParams } from '../../../helpers/types';
 // BUSD USDT USDC 
 export const rateStrategyAClass: IInterestRateStrategyParams = {
     name: "rateStrategyAClass",

@@ -4,7 +4,7 @@
   "description": "PRESTARE be",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./app.ts",
+    "dev": "nodemon ./app.ts --ignore cache/",
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

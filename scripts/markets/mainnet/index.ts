@@ -11,8 +11,8 @@ import {
     strategyUSDC_A,
     strategyUSDT_A
 } from "./reserveConfig";
-import { MOCK_CHAINLINK_AGGREGATORS_PRICES, oneUSD, ZERO_ADDRESS } from "../../helpers/constants";
-import { EthereumNetwork } from "../../helpers/types";
+import { MOCK_CHAINLINK_AGGREGATORS_PRICES, oneUSD, ZERO_ADDRESS } from "../../../helpers/constants";
+import { EthereumNetwork } from "../../../helpers/types";
 
 export const Mainnet = {
     MockUsdPriceInWei: '209414684000',

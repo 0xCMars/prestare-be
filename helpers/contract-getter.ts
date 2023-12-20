@@ -2,7 +2,7 @@ import low from 'lowdb';
 import FileSync from 'lowdb/adapters/FileSync';
 import { NETWORK, PROVIDER } from '../constant';
 import {ethers} from "hardhat";
-import { ContractName } from '../scripts/helpers/types';
+import { ContractName } from './types';
 import { artifacts } from 'hardhat';
 import { read } from 'fs';
 import { add } from 'lodash';
