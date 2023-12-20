@@ -8,6 +8,7 @@ import { Mainnet } from './scripts/markets/mainnet';
 import { dashboardGetTokenDeposit, dashboardGetTLV, getDashTokenInfo } from './helpers/Dashboard/getData';
 import { getTotalCRT } from './helpers/Dashboard/getTotalCRT';
 import { getAssetInfo } from './helpers/Asset/getAssetInfo';
+import { getUserInfo } from './helpers/User/getUserInfo';
 // var corsOptions = {
 //   origin: "*"
 // };
@@ -36,7 +37,7 @@ app.get("/dashboard/tokenInfo/:tokenSymbol/:assetTier", (req: Request, res: Resp
 app.get("/assetPage/assetInfo/:tokenSymbol/:assetTier", (req: Request, res: Response) => getAssetInfo(req, res));
 
 // todo 获取用户在某个token上的余额
-app.get("/userWallet")
+app.get("/userWallet/:tokenSymbol/:assetTier/:userAddr", (req: Request, res: Response) => getUserInfo(req, res))
 // todo 获取用户在某个token上的余额
 // todo 获取用户的账户情况
 
@@ -46,6 +47,6 @@ app.get("/userWallet")
 //   console.log(`服务器运行端口： ${PORT}.`);
 // });
 const PORT = 8686;
-app.listen(PORT, '0.0.0.0',() => {
+app.listen(PORT,() => {
   console.log(` running at http://120.53.224.174:${PORT}`);
 });
