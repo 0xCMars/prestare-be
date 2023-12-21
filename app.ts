@@ -4,7 +4,7 @@ import express, { Express, NextFunction, Request, Response } from 'express';
 import { getTokenContract } from './helpers/contract-getter';
 import { PROVIDER } from './constant';
 import { Mainnet } from './scripts/markets/mainnet';
-import { dashboardGetTokenDeposit, dashboardGetTLV, getDashTokenInfo } from './helpers/Dashboard/getData';
+import { dashboardGetTokenDeposit, dashboardGetTLV, getDashTokenInfo, getTierTokenListInfo } from './helpers/Dashboard/getData';
 import { getTotalCRT } from './helpers/Dashboard/getTotalCRT';
 import { getAssetInfo } from './helpers/Asset/getAssetInfo';
 import { getUserInfo } from './helpers/User/getUserInfo';
@@ -55,6 +55,8 @@ app.get("/dashboard/tokenDeposit/:tokenSymbol", (req: Request, res: Response) =>
 app.get("/dashboard/tvlAmount", (req: Request, res: Response) => dashboardGetTLV(req, res))
 
 app.get("/dashboard/crtAmount", (req: Request, res: Response) => getTotalCRT(req, res));
+
+app.get("/market/:assetTier", (req: Request, res: Response) => getTierTokenListInfo(req, res));
 
 app.get("/dashboard/tokenInfo/:tokenSymbol/:assetTier", (req: Request, res: Response) => getDashTokenInfo(req, res));
 

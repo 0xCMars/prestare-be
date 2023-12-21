@@ -3,9 +3,7 @@ import { BigNumber, ethers, Contract } from "ethers";
 import { constructTokenRiskName } from "../utils";
 import { Mainnet } from '../../scripts/markets/mainnet';
 import express, { Express, Request, Response } from 'express';
-
-import exp from "constants";
-
+import { getAssetTierInfo } from "./getTierAsset";
 export async function calAssetTotalDeposit(asset: string, highrisk: number) {
     let token = await getTokenContract(asset);
     let tokenTotalDeposit = BigNumber.from(0);
@@ -17,6 +15,22 @@ export async function calAssetTotalDeposit(asset: string, highrisk: number) {
         tokenTotalDeposit = tokenRiskDeposit.add(tokenTotalDeposit);
     }
     return tokenTotalDeposit
+}
+
+export const calDebtTotalBorrow = async (symbol: string, highrisk: number) => {
+    let token = await getTokenContract(symbol);
+    let tokenTotalDebt = BigNumber.from(0);
+    let counter = await getCounter();
+
+    for (let risk = 2; risk >= highrisk; risk--) {
+        let token_risk = constructTokenRiskName(symbol, risk);
+        let reserveInfo = await counter.getReserveData(token.address, risk);
+        let pToken_Tier_debt = await getVariableDebtToken(reserveInfo.variableDebtTokenAddress);
+        let pToken_Tier_debtSupply = await pToken_Tier_debt.totalSupply();
+
+        tokenTotalDebt = tokenTotalDebt.add(pToken_Tier_debtSupply);
+    }
+    return tokenTotalDebt;
 }
 
 async function calculateTotalAssetUSD(asset: Contract, assetAmount: BigNumber) {
@@ -41,6 +55,13 @@ export const getTokenTotalAssetUSD = async function (asset: string, highrisk: nu
     return totalAmount;
 }
 
+export const getdebtTotalAssetUSD = async (asset: string, highrisk: number) => {
+    let tokenContract = await getTokenContract(asset);
+    let tokenBorrow = await calDebtTotalBorrow(asset, highrisk);
+    let totalBorrowAmount = await calculateTotalAssetUSD(tokenContract, tokenBorrow);
+    return totalBorrowAmount;
+}
+
 export const dashboardGetTokenDeposit = async (req: Request, res: Response) => {
     let params = req.params;
     let symbol: string = params.tokenSymbol;
@@ -52,9 +73,13 @@ export const dashboardGetTokenDeposit = async (req: Request, res: Response) => {
     for (let [asset, highrisk] of Object.entries(Mainnet.AssetTier)) {
       // console.log(asset);
       if (asset == symbol) {
-        let totalAmount = await getTokenTotalAssetUSD(asset, highrisk);
-        console.log("total:", totalAmount);
-        res.json({ "totalAmount": totalAmount.toNumber()});
+        let totalSupplyAmount = await getTokenTotalAssetUSD(asset, highrisk);
+        console.log("total:", totalSupplyAmount);
+        let totalBorrowAmount = await getdebtTotalAssetUSD(asset, highrisk);
+        res.json({ 
+            "totalSupplyAmount": totalSupplyAmount.toNumber(),
+            "totalBorrowAmount": totalBorrowAmount.toNumber()
+        });
       }
     }
 }
@@ -76,7 +101,7 @@ export const dashboardGetTLV = async (req: Request, res: Response) => {
     res.json({"totalTVL": totalTVL});
 }
 
-export const getDashTokenInfo =async (req: Request, res: Response) => {
+export const getDashTokenInfo = async (req: Request, res: Response) => {
     let params = req.params;
     let symbol: string = params.tokenSymbol;
     let assetTier: string = params.assetTier;
@@ -94,7 +119,7 @@ export const getDashTokenInfo =async (req: Request, res: Response) => {
 
     let pToken_assetTier = await getPToken(reserveInfo.pTokenAddress);
     let pToken_Supply = await pToken_assetTier.totalSupply(); 
-    console.log("pUSDC_C total Supply is", pToken_Supply);
+    console.log("pToken_Supply total Supply is", pToken_Supply);
     let pToken_Tier_debt = await getVariableDebtToken(reserveInfo.variableDebtTokenAddress);
     let pToken_Tier_debtSupply = await pToken_Tier_debt.totalSupply();
  
@@ -107,3 +132,17 @@ export const getDashTokenInfo =async (req: Request, res: Response) => {
     res.json(info);
 }
 
+export const getTierTokenListInfo = async (req: Request, res: Response) => {
+    let params = req.params;
+    let assetTier: number = Number(params.assetTier);
+    let assetTierInfoList: { [key: string]: any }[] = [];
+    for (let [asset, highrisk] of Object.entries(Mainnet.AssetTier)) {
+        console.log(highrisk);
+        if (assetTier >= highrisk) {
+            console.log(asset);
+            let assetInfo = await getAssetTierInfo(asset, assetTier);
+            assetTierInfoList.push(assetInfo);
+        }
+    }
+    res.json({assetTierInfoList});
+}
