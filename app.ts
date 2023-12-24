@@ -8,7 +8,10 @@ import { dashboardGetTokenDeposit, dashboardGetTLV, getDashTokenInfo, getTierTok
 import { getTotalCRT } from './helpers/Dashboard/getTotalCRT';
 import { getAssetInfo } from './helpers/Asset/getAssetInfo';
 import { getUserInfo } from './helpers/User/getUserInfo';
-
+import { getSupplyInfoByUser } from './helpers/Asset/getSupply';
+import { getBorrowInfoByUser } from './helpers/Asset/getBorrow';
+import { getWithdrawInfoByUser } from './helpers/Asset/getWithdraw';
+import { getRepayInfoByUser } from './helpers/Asset/getRepay';
 
 const app: Express = express();
 
@@ -63,9 +66,17 @@ app.get("/dashboard/tokenInfo/:tokenSymbol/:assetTier", (req: Request, res: Resp
 app.get("/assetPage/assetInfo/:tokenSymbol/:assetTier", (req: Request, res: Response) => getAssetInfo(req, res));
 
 // todo 获取用户在某个token上的余额
-app.get("/userWallet/:tokenSymbol/:assetTier/:userAddr", (req: Request, res: Response) => getUserInfo(req, res))
+app.get("/userWallet/:tokenSymbol/:assetTier/:userAddr", (req: Request, res: Response) => getUserInfo(req, res));
 
-// todo 获取用户在某个token上的余额
+app.get("/supplyInfo/:tokenSymbol/:assetTier/:userAddr", (req: Request, res: Response) => getSupplyInfoByUser(req, res));
+
+app.get("/borrowInfo/:tokenSymbol/:assetTier/:userAddr", (req: Request, res: Response) => getBorrowInfoByUser(req, res));
+
+app.get("/withdrawInfo/:tokenSymbol/:assetTier/:userAddr", (req: Request, res: Response) => getWithdrawInfoByUser(req, res));
+
+app.get("/repayInfo/:tokenSymbol/:assetTier/:userAddr", (req: Request, res: Response) => getRepayInfoByUser(req, res));
+
+
 // todo 获取用户的账户情况
 
 // 设置监听端口

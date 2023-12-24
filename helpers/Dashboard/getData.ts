@@ -33,6 +33,17 @@ export const calDebtTotalBorrow = async (symbol: string, highrisk: number) => {
     return tokenTotalDebt;
 }
 
+export const getAssetPrice = async (address: string) => {
+    let priceOrcale = await getPrestareOracle();
+    let asset_price = await priceOrcale.getAssetPrice(address);
+    let oracle_dicimals = 8;
+
+    return {
+        "price": asset_price,
+        "decimals": oracle_dicimals,
+    }
+}
+
 async function calculateTotalAssetUSD(asset: Contract, assetAmount: BigNumber) {
     let priceOrcale = await getPrestareOracle();
     let oracle_dicimals = ethers.utils.parseUnits("1", 8);

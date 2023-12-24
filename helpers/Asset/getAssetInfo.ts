@@ -2,19 +2,31 @@ import { Request, Response } from 'express';
 import { getPTokenContract, getTokenContract, getPrestareOracle, getCounter, getPToken, getVariableDebtToken, getDefaultIRModel} from "../contract-getter";
 import { BigNumber, ethers, Contract } from "ethers";
 import { getLtv, getLiquidationThreshold, getLiquidationBonus, getReserveFactor} from "../utils/configParser";
+import { getAssetPrice } from '../Dashboard/getData';
 
-export const getAssetInfo =async (req: Request, res: Response) => {
+export const getAssetInfo = async (req: Request, res: Response) => {
     let params = req.params;
     let symbol: string = params.tokenSymbol;
     let assetTier: string = params.assetTier;
     console.log(`get ${symbol} Info`);
     let token = await getTokenContract(symbol);
+    let tokenDeci = await token.decimals();
     // console.log(await token.symbol());
     // console.log(Mainnet.AssetTier)
     // console.log(Object.entries(Mainnet.AssetTier).keys());
     let counter = await getCounter();
     let reserveInfo = await counter.getReserveData(token.address, assetTier);
     console.log(reserveInfo);
+
+    // ReserveSize 
+    let pToken_assetTier = await getPToken(reserveInfo.pTokenAddress);
+    let pTokenSupply = await pToken_assetTier.scaledTotalSupply();
+    let pToken_deci = await pToken_assetTier.decimals();
+    let reserveSize = {
+        "ReserveSize": pTokenSupply,
+        "decimals": pToken_deci
+    }
+
     let ray = ethers.utils.parseUnits("1", 27);
     let supplyIR = reserveInfo.currentLiquidityRate.mul(10000).div(ray).toNumber();
     let borrowIR = reserveInfo.currentVariableBorrowRate.mul(10000).div(ray).toNumber();
@@ -30,7 +42,16 @@ export const getAssetInfo =async (req: Request, res: Response) => {
     console.log("Liquidation Bonus %d %", LiqBonus);
     console.log("Reserve Factor %d %", reserveFac);
 
+    // Available Liquidity
     let avaliableLiquidity = await token.balanceOf(reserveInfo.pTokenAddress);
+    let availLiq = {
+        "AvailableLiquidity": avaliableLiquidity,
+        "decimals": tokenDeci
+    }
+
+    // Oracle Price
+    let oraclePrice = await getAssetPrice(token.address);
+
     let pToken_Tier_debt = await getVariableDebtToken(reserveInfo.variableDebtTokenAddress);
     let totalVariableDebt = (await pToken_Tier_debt.scaledTotalSupply()).mul(reserveInfo.variableBorrowIndex).div(ray);
     // console.log(avaliableLiquidity);
@@ -53,6 +74,9 @@ export const getAssetInfo =async (req: Request, res: Response) => {
     console.log("OPTIMAL_UTILIZATION_RATE is: ", opti_rate.toFixed(2));
 
     let info = {
+        "ReserveSize" : reserveSize,
+        "AvailableLiquidity": availLiq,
+        "OraclePrice": oraclePrice,
         "SupplyAPY": (supplyIR / 100).toFixed(2),
         "MaxLtv": MaxLtv,
         "LiquidationThresold": LiqThreshold,
