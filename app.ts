@@ -12,7 +12,12 @@ import { getSupplyInfoByUser } from './helpers/Asset/getSupply';
 import { getBorrowInfoByUser } from './helpers/Asset/getBorrow';
 import { getWithdrawInfoByUser } from './helpers/Asset/getWithdraw';
 import { getRepayInfoByUser } from './helpers/Asset/getRepay';
-
+import { getUserSupply } from './helpers/User/getUserSupply';
+import { getUserDebt } from './helpers/User/getUserBorrow';
+import { getUserCanSupply } from './helpers/User/getUserCanSupply';
+import { getUserCanBorrow } from './helpers/User/getUserCanBorrow';
+import { getUserPRS } from './helpers/User/getUserPRS';
+import { getUserCRT } from './helpers/User/getUserCRT';
 const app: Express = express();
 
 var allowCrossDomain = function(req: any, res: any, next: NextFunction) {
@@ -68,6 +73,7 @@ app.get("/assetPage/assetInfo/:tokenSymbol/:assetTier", (req: Request, res: Resp
 // todo 获取用户在某个token上的余额
 app.get("/userWallet/:tokenSymbol/:assetTier/:userAddr", (req: Request, res: Response) => getUserInfo(req, res));
 
+// 用于在操作时展示的界面
 app.get("/supplyInfo/:tokenSymbol/:assetTier/:userAddr", (req: Request, res: Response) => getSupplyInfoByUser(req, res));
 
 app.get("/borrowInfo/:tokenSymbol/:assetTier/:userAddr", (req: Request, res: Response) => getBorrowInfoByUser(req, res));
@@ -76,8 +82,21 @@ app.get("/withdrawInfo/:tokenSymbol/:assetTier/:userAddr", (req: Request, res: R
 
 app.get("/repayInfo/:tokenSymbol/:assetTier/:userAddr", (req: Request, res: Response) => getRepayInfoByUser(req, res));
 
+// 展示在dashboard your supply/Borrow
+app.get("/dashboard/UserAllSupply/:userAddr", (req: Request, res: Response) => getUserSupply(req, res));
 
-// todo 获取用户的账户情况
+app.get("/dashboard/UserAllBorrow/:userAddr", (req: Request, res: Response) => getUserDebt(req, res));
+
+// 展示在Asset to Supply/Borrow
+app.get("/dashboard/AssetToSupply/:userAddr", (req: Request, res: Response) => getUserCanSupply(req, res));
+
+app.get("/dashboard/AssetToBorrow/:userAddr", (req: Request, res: Response) => getUserCanBorrow(req, res));
+
+// PRS stake
+app.get("/stake/prs/:userAddr", (req: Request, res: Response) => getUserPRS(req, res));
+
+// CRT stake
+app.get("/stake/crt/:userAddr", (req: Request, res: Response) => getUserCRT(req, res));
 
 // 设置监听端口
 // const PORT = process.env.PORT || 8686;

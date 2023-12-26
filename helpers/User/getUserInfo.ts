@@ -10,7 +10,13 @@ export const getUserInfo =async (req: Request, res: Response) => {
     let userAddr:string = params.userAddr;
     let symbol: string = params.tokenSymbol;
     let assetTier: string = params.assetTier;
-
+    if (assetTier == "C") {
+        assetTier = "2"
+    } else if (assetTier == "B") {
+        assetTier = "1"
+    } else if (assetTier == "A") {
+        assetTier = "0"
+    }
     let assetPrice = await getAssetPrice(symbol, assetTier);
 
     let token = await getTokenContract(symbol);
@@ -23,6 +29,7 @@ export const getUserInfo =async (req: Request, res: Response) => {
     }
 
     let token_Tier = constructTokenRiskName(symbol, Number(assetTier));
+    console.log("token", token_Tier);
     let ptoken_Tier = await getPTokenContract(token_Tier);
 
     let pTokenBalance = await ptoken_Tier.scaledBalanceOf(userAddr);
