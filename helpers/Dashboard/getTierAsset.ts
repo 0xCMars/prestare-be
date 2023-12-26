@@ -3,12 +3,12 @@ import { oneRay } from "../constants";
 import { constructTokenRiskName } from "../utils";
 
 export const getAssetTierInfo = async (symbol: string, assetTier: number) => {
-    console.log("get %{symbol} Info");
+    console.log(`get ${symbol} Info`);
     let token = await getTokenContract(symbol);
     let tokenAssetSym = constructTokenRiskName(symbol ,assetTier)
     let counter = await getCounter();
     let reserveInfo = await counter.getReserveData(token.address, assetTier);
-    console.log(reserveInfo);
+    // console.log(reserveInfo);
     let supplyIR = reserveInfo.currentLiquidityRate.mul(10000).div(oneRay);
     let borrowIR = reserveInfo.currentVariableBorrowRate.mul(10000).div(oneRay);
 

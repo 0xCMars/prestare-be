@@ -155,5 +155,6 @@ export const getTierTokenListInfo = async (req: Request, res: Response) => {
             assetTierInfoList.push(assetInfo);
         }
     }
+    console.log(assetTierInfoList);
     res.json({assetTierInfoList});
 }

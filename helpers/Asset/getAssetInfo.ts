@@ -57,7 +57,13 @@ export const getAssetInfo = async (req: Request, res: Response) => {
     // console.log(avaliableLiquidity);
     // console.log(totalVariableDebt);
     // 保留两位小数
-    let Utilization = totalVariableDebt.mul(10000).div(avaliableLiquidity.add(totalVariableDebt)).toNumber();
+    let Utilization  = 0;
+    if (totalVariableDebt.eq(0)) {
+        Utilization = 0;
+    } else {
+        Utilization = totalVariableDebt.mul(10000).div(avaliableLiquidity.add(totalVariableDebt)).toNumber();
+    }
+    
     console.log("Utilization rate: %d %", (Utilization / 100).toFixed(2));
 
     // 曲线图，利用率导致利率变化的图
