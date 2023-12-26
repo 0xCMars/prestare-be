@@ -37,7 +37,6 @@ export const getAssetPrice = async (address: string) => {
     let priceOrcale = await getPrestareOracle();
     let asset_price = await priceOrcale.getAssetPrice(address);
     let oracle_dicimals = 8;
-
     return {
         "price": asset_price,
         "decimals": oracle_dicimals,

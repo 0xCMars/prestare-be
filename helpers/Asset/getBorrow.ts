@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { getPTokenContract, getTokenContract, getPrestareOracle, getCounter, getPToken, getVariableDebtToken, getDefaultIRModel} from "../contract-getter";
+import { getTokenContract, getPrestareOracle, getCounter, getPToken, getVariableDebtToken, getDefaultIRModel} from "../contract-getter";
 import { BigNumber, ethers, Contract } from "ethers";
 import { getBorrowingEnabled, getLtv} from "../utils/configParser";
 import { getAssetPrice } from '../Dashboard/getData';
