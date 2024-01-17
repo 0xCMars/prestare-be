@@ -2,8 +2,9 @@ import { getPTokenContract, getTokenContract, getPrestareOracle, getCounter, get
 import { BigNumber, ethers, Contract } from "ethers";
 import { constructTokenRiskName } from "../utils";
 import { Mainnet } from '../../scripts/markets/mainnet';
-import express, { Express, Request, Response } from 'express';
+import {Request, Response } from 'express';
 import { getAssetTierInfo } from "./getTierAsset";
+
 export async function calAssetTotalDeposit(asset: string, highrisk: number) {
     let token = await getTokenContract(asset);
     let tokenTotalDeposit = BigNumber.from(0);

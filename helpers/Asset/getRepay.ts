@@ -42,9 +42,18 @@ export const getRepayInfoByUser = async (req: Request, res: Response) => {
     }
     
     let userAccount = await counter.getUserAccountData(userAddr, assetTier);
-    let userLTV = {
-        "ltv": userAccount.ltv.toString(),
-        "decimal": ltvDeci
+    let userStatus = {
+        "totalCollateralUSD": userAccount.totalCollateralUSD.toString(),
+        "totalDebtUSD": userAccount.totalDebtUSD.toString(),
+        "usdDecimal": 8,
+        // "ltv": userAccount.ltv.toString(),
+        // "ltvDecimal": ltvDeci
+    }
+
+    let rewardDeci = 2;
+    let reward = {
+        "amount": "100",
+        "deci": rewardDeci
     }
 
     let info = {
@@ -52,8 +61,9 @@ export const getRepayInfoByUser = async (req: Request, res: Response) => {
         "OraclePrice": oraclePrice,
         "DebtAmount": debt,
         "AssetLTV": ltv,
-        "UserLTV": userLTV,
-        "CRT": 0
+        "UserStatus": userStatus,
+        "CRT": 0,
+        "Reward": reward
     }
 
     res.json(info);

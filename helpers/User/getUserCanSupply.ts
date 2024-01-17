@@ -4,10 +4,11 @@ import { Request, Response } from 'express';
 import { getAssetTierInfo } from "../Dashboard/getTierAsset";
 import { getBorrowingEnabled} from "../utils/configParser";
 import { getAssetPrice } from "../Dashboard/getData";
+import { COUNTER } from "../../constant";
 
 export const getUserHaveBal = async (symbol:string, userAddr: string) => {
     let token = await getTokenContract(symbol);
-    let counter = await getCounter();
+    // let counter = await getCounter();
     let token_deci = await token.decimals();
     let tokenBalance = await token.balanceOf(userAddr);
     return {
@@ -17,9 +18,9 @@ export const getUserHaveBal = async (symbol:string, userAddr: string) => {
 }
 
 export const getAssetConfiguration = async (symbol:string, risk: string) => {
-    let counter = await getCounter();
+    // let counter = await getCounter();
     let token = await getTokenContract(symbol);
-    let assetConfig = await counter.getConfiguration(token.address, risk);
+    let assetConfig = await COUNTER.getConfiguration(token.address, risk);
     let config = assetConfig.data;
     return config;
 }

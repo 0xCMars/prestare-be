@@ -1,13 +1,14 @@
 import { getPTokenContract, getTokenContract, getPrestareOracle, getCounter, getPToken, getVariableDebtToken } from "../contract-getter";
 import { oneRay } from "../constants";
 import { constructTokenRiskName } from "../utils";
+import { COUNTER } from "../../constant";
 
 export const getAssetTierInfo = async (symbol: string, assetTier: number) => {
     console.log(`get ${symbol} Info`);
     let token = await getTokenContract(symbol);
     let tokenAssetSym = constructTokenRiskName(symbol ,assetTier)
-    let counter = await getCounter();
-    let reserveInfo = await counter.getReserveData(token.address, assetTier);
+    // let counter = await getCounter();
+    let reserveInfo = await COUNTER.getReserveData(token.address, assetTier);
     // console.log(reserveInfo);
     let supplyIR = reserveInfo.currentLiquidityRate.mul(10000).div(oneRay);
     let borrowIR = reserveInfo.currentVariableBorrowRate.mul(10000).div(oneRay);

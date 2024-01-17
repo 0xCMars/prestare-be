@@ -6,11 +6,11 @@ import { Request, Response } from 'express';
 import { getAssetTierInfo } from "../Dashboard/getTierAsset";
 import { getBorrowingEnabled} from "../utils/configParser";
 import { getAssetPrice } from "../Dashboard/getData";
-
-export const getUserDebtBal = async (symbol:string, risk: number, userAddr: string) => {
+import { COUNTER } from "../../constant";
+export const getAssetDebtBal = async (symbol:string, risk: number, userAddr: string) => {
     let token = await getTokenContract(symbol);
-    let counter = await getCounter();
-    let reserveInfo = await counter.getReserveData(token.address, risk);
+    // let counter = await getCounter();
+    let reserveInfo = await COUNTER.getReserveData(token.address, risk);
     let tokenDeci = await token.decimals();
     let p_token_Bal = await token.balanceOf(reserveInfo.pTokenAddress);
     return {
@@ -28,7 +28,7 @@ export const getUserCanBorrow = async (req: Request, res: Response) => {
         for (let risk = 2; risk >= Number(highrisk); risk--) {
             console.log(symbol);
             let assetTierInfo = await getAssetTierInfo(symbol, risk);
-            let assetBalance = await getUserDebtBal(symbol, risk, userAddr);
+            let assetBalance = await getAssetDebtBal(symbol, risk, userAddr);
             if (assetBalance.Balance.eq(0)) {
                 continue
             }

@@ -1,9 +1,6 @@
 import express, { Express, NextFunction, Request, Response } from 'express';
 // const bodyParser = require("body-parser");
 // const cors = require("cors");
-import { getTokenContract } from './helpers/contract-getter';
-import { PROVIDER } from './constant';
-import { Mainnet } from './scripts/markets/mainnet';
 import { dashboardGetTokenDeposit, dashboardGetTLV, getDashTokenInfo, getTierTokenListInfo } from './helpers/Dashboard/getData';
 import { getTotalCRT } from './helpers/Dashboard/getTotalCRT';
 import { getAssetInfo } from './helpers/Asset/getAssetInfo';
@@ -18,6 +15,9 @@ import { getUserCanSupply } from './helpers/User/getUserCanSupply';
 import { getUserCanBorrow } from './helpers/User/getUserCanBorrow';
 import { getUserPRS } from './helpers/User/getUserPRS';
 import { getUserCRT } from './helpers/User/getUserCRT';
+import { createServer } from 'https';
+import { readFileSync } from "fs";
+import http from 'node:http';
 const app: Express = express();
 
 var allowCrossDomain = function(req: any, res: any, next: NextFunction) {
@@ -104,6 +104,23 @@ app.get("/stake/crt/:userAddr", (req: Request, res: Response) => getUserCRT(req,
 //   console.log(`服务器运行端口： ${PORT}.`);
 // });
 const PORT = 8686;
-app.listen(PORT, "0.0.0.0", () => {
+const httpsPORT = 8547;
+// app.listen(PORT, "0.0.0.0", () => {
+//   console.log(` running at http://120.53.224.174:${PORT}`);
+// });
+
+const options = {
+  key: readFileSync('keys/prestare.fun.key'),
+  cert: readFileSync('keys/prestare.fun_bundle.crt'),
+};
+
+const httpsServer = createServer(options,app);
+const server = http.createServer(app)
+
+server.listen(PORT, "0.0.0.0", () => {
   console.log(` running at http://120.53.224.174:${PORT}`);
-});
+})
+
+httpsServer.listen(httpsPORT, "0.0.0.0", () => {
+  console.log(` running at https://120.53.224.174:${httpsPORT}`);
+})
